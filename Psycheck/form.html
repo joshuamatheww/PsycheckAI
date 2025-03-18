@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PsyCheck - AI | Enter Your Details</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body Styling */
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }
+
+    /* Background Image with Opacity */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('bg.png') center/cover no-repeat;
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    /* Form Container */
+    .container {
+      max-width: 450px;
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0px 4px 20px rgba(92, 15, 163, 0.15);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: #5C0FA3;
+      margin-bottom: 15px;
+    }
+
+    /* Form Labels */
+    label {
+      font-size: 1.1rem;
+      color: #4A0C85;
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+    }
+
+    /* Input Fields */
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      font-size: 1rem;
+      background-color: #f9f6ff;
+      margin-bottom: 15px;
+    }
+
+    /* Button */
+    .btn {
+      font-size: 1.2rem;
+      background-color: #5C0FA3;
+      color: white;
+      border: none;
+      padding: 14px;
+      width: 100%;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+      background-color: #4A0C85;
+      transform: scale(1.05);
+    }
+
+    /* Thank You Section */
+    #questionnaire-link {
+      display: none;
+      text-align: center;
+      background-color: rgba(243, 232, 255, 0.9);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0px 0px 15px rgba(92, 15, 163, 0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    #questionnaire-link p {
+      color: #5C0FA3;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    #questionnaire-link a {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      padding: 15px 25px;
+      color: #fff;
+      background-color: #5C0FA3;
+      border-radius: 25px;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    #questionnaire-link a:hover {
+      background-color: #4A0C85;
+      transform: scale(1.05);
+    }
+
+    /* Fade-out effect for form */
+    .fade-out {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    /* Fade-in effect for thank-you section */
+    .fade-in {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    
+  </style>
+</head>
+<body>
+
+  <div class="container" id="form-container">
+    <h1 style="font-size: 1.8rem;">Enter Your Details</h1>
+    
+    <form id="userForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" placeholder="Enter your age" required>
+
+      <label for="gender">Gender:</label>
+      <select id="gender" required>
+        <option value="">Select Gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="location">Location:</label>
+      <input type="text" id="location" placeholder="Enter your location" required>
+
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </div>
+
+  <!-- Thank You Section -->
+  <div id="questionnaire-link">
+    <p>Thank you for your information!</p>
+    <a href="https://35ea-34-70-77-185.ngrok-free.app/" target="_blank">Access Questionnaire</a>
+  </div>
+
+  <script>
+    // Fade-in when page loads
+    document.addEventListener("DOMContentLoaded", function() {
+      document.body.style.opacity = "1";
+    });
+
+    // Handle Form Submission
+    document.getElementById("userForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // Prevent default form submission
+
+      // Fade out form
+      document.getElementById("form-container").classList.add("fade-out");
+
+      setTimeout(() => {
+        document.getElementById("form-container").style.display = "none"; // Hide form
+        document.getElementById("questionnaire-link").style.display = "block";
+        document.getElementById("questionnaire-link").classList.add("fade-in"); // Fade in thank-you section
+      }, 600);
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(() => {
+      document.body.style.opacity = "3";
+    }, 100); // Small delay to trigger transition
+  });
+  </script>
+
+</body>
+</html>
