@@ -1,26 +1,96 @@
 import streamlit as st
 
-# Set page configuration
+# Set Page Configuration
 st.set_page_config(page_title="PsyCheck - AI", page_icon="🧠", layout="centered")
 
-# Title and Introduction
-st.title("PsyCheck - AI")
-st.subheader("Your companion for early mental health detection")
+# Apply Custom CSS
+custom_css = """
+<style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-# Button to navigate to the form
-if st.button("Get Started"):
-    st.session_state["page"] = "form"
+    /* Center Content */
+    .main-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      position: relative;
+    }
 
-# Display the form if the user clicks "Get Started"
-if "page" in st.session_state and st.session_state["page"] == "form":
-    st.title("Enter Your Details")
+    /* Custom Box */
+    .container {
+      max-width: 600px;
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0px 4px 20px rgba(92, 15, 163, 0.15);
+      position: relative;
+      animation: fadeIn 1s ease-in-out;
+    }
 
-    name = st.text_input("Name", "")
-    age = st.number_input("Age", min_value=1, max_value=120, step=1)
-    gender = st.selectbox("Gender", ["Select", "Male", "Female", "Other"])
-    location = st.text_input("Location", "")
+    /* Title */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: #5C0FA3;
+      margin-bottom: 15px;
+    }
 
-    if st.button("Submit"):
-        st.success("Thank you for providing your information!")
-        st.markdown("[Access Questionnaire](https://35ea-34-70-77-185.ngrok-free.app/)")
+    /* Description */
+    p {
+      font-size: 1.2rem;
+      color: #4A0C85;
+      margin-bottom: 25px;
+    }
 
+    /* Button */
+    .btn {
+      font-size: 1.2rem;
+      background-color: #5C0FA3;
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+      background-color: #4A0C85;
+      transform: scale(1.05);
+    }
+
+    /* Fade-in Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+"""
+
+st.markdown(custom_css, unsafe_allow_html=True)
+
+# Main Container
+st.markdown('<div class="main-container">', unsafe_allow_html=True)
+st.markdown('<div class="container">', unsafe_allow_html=True)
+
+# Title
+st.markdown('<h1>PsyCheck - AI</h1>', unsafe_allow_html=True)
+st.markdown('<p>Your companion for early mental health detection</p>', unsafe_allow_html=True)
+
+# Button
+st.markdown(
+    '<a href="?page=form" class="btn">Get Started</a>',
+    unsafe_allow_html=True
+)
+
+st.markdown('</div>', unsafe_allow_html=True)  # Close container
+st.markdown('</div>', unsafe_allow_html=True)  # Close main container
